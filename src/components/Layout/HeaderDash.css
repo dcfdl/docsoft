@@ -1,0 +1,168 @@
+/* src/components/Layout/HeaderDash.css */
+.header {
+  height: 3.5rem;
+  background-color: #343a40;
+  color: white;
+  display: flex;
+  align-items: center;
+  padding: 0 1rem;
+  position: fixed; /* Make header fixed */
+  top: 0;
+  left: 0;
+  width: 100%;   /* Full width */
+  z-index: 1030; /* Ensure it's above other content like sidebar */
+}
+
+.header-title { /* New class for h1 to avoid absolute positioning conflict */
+  margin: 0;
+  /* Original h1 style:
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+  */
+}
+
+.search-container {
+  /* padding: 10px; */ /* Removed, using Bootstrap classes for spacing */
+  margin-left: auto; /* Pushes to the right */
+  position: relative; /* For dropdown positioning */
+}
+
+#searchInput { /* Can be more specific: .search-container input */
+  cursor: text;
+  background-color: #fff;
+  width: 300px; /* Retaining width */
+}
+
+#searchInput:focus {
+  box-shadow: none;
+  border-color: #ced4da;
+}
+
+.search-dropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  background-color: #343a40;
+  border-radius: 0 0 4px 4px; /* Adjusted for better look */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  max-height: 300px;
+  overflow-y: auto;
+  /* display: none; */ /* Visibility controlled by React state */
+  opacity: 0;
+  transform: translateY(-10px);
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  z-index: 1010;
+  list-style: none; /* For ul */
+  padding: 0;
+  margin: 0;
+}
+
+.search-dropdown.active {
+  /* display: block; */ /* Visibility controlled by React state */
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.search-item {
+  color: rgba(255, 255, 255, 0.8);
+  padding: 8px 16px;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  border-bottom: 1px solid #495057;
+}
+
+.search-item:hover {
+  background-color: #495057;
+  color: white;
+}
+
+.search-item:last-child {
+  border-bottom: none;
+}
+
+.patient-name {
+  font-weight: bold;
+  font-size: 1rem;
+}
+
+.patient-info {
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.patient-status {
+  font-size: 0.85rem;
+}
+
+/* User Dropdown */
+.user-dropdown-container { /* New wrapper class */
+  position: relative;
+  margin-left: 1rem; /* Spacing from search bar */
+}
+
+.dropdown-trigger {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  /* padding: 20px 12px; */ /* Bootstrap button will handle padding */
+  cursor: pointer;
+  color: white; /* Ensure icon color */
+}
+
+.dropdown-arrow {
+  font-size: 0.8rem;
+  transition: transform 0.3s ease;
+}
+
+.user-dropdown-container.active .dropdown-arrow {
+  transform: rotate(180deg); /* Changed rotation for clarity */
+}
+
+.user-dropdown-menu { /* Renamed from .dropdown-menu to avoid Bootstrap conflict */
+  position: absolute;
+  right: 0;
+  top: calc(100% + 5px); /* Add some spacing from trigger */
+  background-color: #343a40;
+  border-radius: 4px;
+  padding: 8px 0;
+  list-style: none;
+  margin: 0;
+  width: 160px;
+  /* display: none; */ /* Controlled by React state */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  opacity: 0;
+  transform: translateY(-10px);
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  z-index: 1030;
+}
+
+.user-dropdown-container.active .user-dropdown-menu {
+  /* display: block; */ /* Controlled by React state */
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.user-dropdown-item { /* Renamed from .dropdown-item */
+  color: white;
+  padding: 8px 16px;
+  text-decoration: none;
+  display: block;
+  background-color: transparent; /* Ensure it's not a button */
+  border: none;
+  width: 100%;
+  text-align: left;
+}
+
+.user-dropdown-item:hover {
+  background-color: #495057;
+}
+
+.user-dropdown-divider { /* Renamed from .dropdown-divider */
+  border-top: 1px solid #495057;
+  margin: 4px 0;
+}

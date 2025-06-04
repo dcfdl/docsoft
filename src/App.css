@@ -1,0 +1,108 @@
+/* src/App.css */
+/* Global Reset and Font from your styles.css */
+* {
+  font-family: 'Montserrat', sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  min-height: 100vh;
+  /* position: relative; */ /* Not strictly needed with 100vh flex body */
+}
+
+body {
+  /* font-family set by '*' */
+  background-color: #f4f7f6;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+#root {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.app-container {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  overflow: hidden; 
+}
+
+.app-body {
+  display: flex;
+  flex-grow: 1;
+  padding-top: 3.5rem; /* Space for the fixed header */
+  overflow: hidden; 
+}
+
+.main-content-area {
+  flex-grow: 1;
+  overflow-y: auto;
+  padding: 1.5rem;
+  transition: margin-left 0.3s ease-in-out;
+  /* margin-bottom from styles.css was 250px, often for non-flex footers.
+     Our flex footer with margin-top:auto should handle it.
+     If content is short, footer sticks to bottom of content.
+     If content is long, footer is after content.
+     If you want footer always at viewport bottom, body needs to be the only scroller. */
+}
+
+/* This directly replaces the PHP's .sidebar.collapsed ~ main logic */
+.main-content-area.sidebar-open {
+  margin-left: 12rem; 
+}
+
+.main-content-area.sidebar-collapsed {
+  margin-left: 4rem; 
+}
+
+/* Footer styling - adapted from your styles.css (the specific one for dashboard) */
+.app-footer {
+  flex-shrink: 0; /* Prevent footer from shrinking */
+  text-align: center;
+  background-color: #000; /* From your styles.css for footer */
+  color: #FFF;       /* From your styles.css for footer */
+  padding: 1rem 0;    /* Give some vertical padding */
+  transition: margin-left 0.3s ease-in-out, width 0.3s ease-in-out;
+  /* margin-top: auto; */ /* This pushes it to the bottom if app-container is display:flex; flex-direction:column; */
+  position: relative; /* As per your styles.css, for z-index */
+  z-index: 1000; /* Ensure it's above some things if necessary, but below modals etc. */
+}
+
+.app-footer.sidebar-open {
+  margin-left: 12rem;
+  width: calc(100% - 12rem);
+}
+
+.app-footer.sidebar-collapsed {
+  margin-left: 4rem;
+  width: calc(100% - 4rem);
+}
+
+/* Responsive adjustments for main content and footer when sidebar is on top */
+@media (max-width: 768px) {
+  .app-body {
+    padding-top: calc(3.5rem + 3.5rem); /* Header + Mobile Sidebar height */
+  }
+  
+  .main-content-area.sidebar-open,
+  .main-content-area.sidebar-collapsed {
+    margin-left: 0;
+  }
+
+  .app-footer.sidebar-open,
+  .app-footer.sidebar-collapsed {
+    margin-left: 0;
+    width: 100%;
+  }
+}
+
+/* Animation from styles.css - keep if used */
+@keyframes appear { /* ... */ }
+/* Preloader from styles.css - keep if you implement it */
+/* #preloader { ... } */

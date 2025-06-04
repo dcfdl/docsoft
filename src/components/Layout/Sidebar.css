@@ -1,0 +1,215 @@
+/* src/components/Layout/Sidebar.css */
+.sidebar {
+  height: calc(100vh - 3.5rem); /* Full height minus header */
+  position: fixed;
+  top: 3.5rem; /* Align below the header */
+  left: 0;
+  width: 12rem;
+  background-color: #343a40;
+  color: white;
+  transition: width 0.3s ease-in-out, padding 0.3s ease-in-out; /* Added padding to transition */
+  display: flex;
+  flex-direction: column;
+  /* justify-content: space-between; */ /* We'll use position:absolute for .logged-in */
+  z-index: 1020; /* Above main content, below fixed header if they could overlap */
+  /* Removed padding-top from here, apply to inner elements if needed */
+}
+
+.sidebar-sticky-container { /* Corresponds to PHP's div.position-sticky */
+  flex-grow: 1; /* Allows this to take up space so .logged-in can be at bottom */
+  overflow-y: auto; /* Allow scrolling for long nav lists */
+  padding: 1rem 0.5rem; /* Inner padding for the scrollable area */
+}
+
+.sidebar .nav-flex-column { /* The UL itself */
+  padding-left: 0;
+  list-style: none;
+}
+
+.sidebar .nav-link {
+  display: flex; /* Align icon and text */
+  align-items: center;
+  gap: 0.75rem;
+  transition: background-color 0.3s ease-in, color 0.3s ease-in;
+  margin-top: 0.5rem; /* Your original was 0.9rem */
+  color: rgba(255, 255, 255, 0.8);
+  border-radius: 5px; /* Your original was 10px */
+  padding: 0.75rem 1rem;
+  text-decoration: none;
+}
+/* Your PHP had .sidebar .nav-link:hover { background-color: #343a40; } which is the same as parent.
+   Assuming you meant a slightly different color or it was a no-op */
+.sidebar .nav-link:hover {
+  background-color: #495057; /* Darker hover, common pattern */
+  color: white;
+}
+
+/* Collapsed State */
+.sidebar.collapsed {
+  width: 4rem;
+  padding-left: 0.5rem; /* Adjust overall padding */
+  padding-right: 0.5rem;
+}
+
+.sidebar.collapsed .sidebar-sticky-container {
+    padding: 1rem 0; /* Adjust padding for centered icons */
+}
+
+.sidebar.collapsed .nav-link {
+  justify-content: center;
+  padding: 0.75rem 0.5rem; /* Reduced padding for icon only */
+}
+
+.sidebar.collapsed .nav-link span {
+  display: none;
+}
+.sidebar.collapsed .nav-link i {
+  margin-right: 0; /* No gap needed if text is hidden */
+}
+
+
+.sidebar.collapsed .logged-in {
+  display: none; /* As per your PHP CSS */
+}
+
+/* Logged In User Section */
+.logged-in {
+  position: absolute; /* As per your PHP CSS */
+  bottom: 0px;      /* Your PHP CSS had 50px - choose one */
+  left: 0;           /* Ensure it starts from left edge */
+  right: 0;          /* Ensure it spans full width of parent */
+  text-align: center;
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.7);
+  padding: 1rem;
+  background-color: #333; /* As per your PHP CSS */
+  width: 100%; /* Ensure it takes the width of the .sidebar container */
+  box-sizing: border-box; /* Include padding in width */
+}
+
+
+/* Sidebar Dropdown (from your PHP CSS) */
+.sidebar-dropdown {
+  position: relative;
+}
+
+.sidebar-dropdown-arrow {
+  font-size: 0.7rem;
+  margin-left: auto; /* Pushes arrow to the right of text */
+  /* position: absolute; */ /* Not needed if margin-left:auto works with flex */
+  /* right: 1rem; */
+  transition: transform 0.3s ease;
+}
+
+/* Handle hover for arrow via JS-controlled 'open' class for accessibility */
+.sidebar-dropdown.open > .nav-link .sidebar-dropdown-arrow {
+  transform: rotate(90deg);
+}
+/* Fallback for pure CSS hover if preferred, but JS gives more control */
+/* .sidebar-dropdown:hover > .nav-link .sidebar-dropdown-arrow {
+    transform: rotate(90deg);
+} */
+
+
+.sidebar-dropdown-menu {
+  display: none; /* Controlled by React state (.open class on parent) */
+  list-style: none;
+  padding: 0.5rem 0;
+  margin: 0.25rem 0 0 0.5rem; /* Slight indent and top margin */
+  background-color: #212529; /* From your PHP CSS */
+  border-radius: 5px; /* Softened from 10px */
+  /* min-width: 11rem; */ /* Removed as it might conflict with sidebar width */
+  /* position: absolute; left: 100%; top: 0; */ /* This makes it fly-out */
+  /* For an accordion style within the sidebar: */
+  position: relative;
+  width: calc(100% - 0.5rem); /* Fit within parent padding */
+  box-shadow: inset 0 2px 4px rgba(0,0,0,0.2); /* Inner shadow for accordian */
+}
+.sidebar.collapsed .sidebar-dropdown-menu { /* Ensure hidden when sidebar is collapsed */
+    display: none !important;
+}
+
+.sidebar-dropdown.open .sidebar-dropdown-menu {
+  display: block;
+}
+
+.sidebar-dropdown-item {
+  color: rgba(255, 255, 255, 0.8);
+  padding: 0.5rem 1rem;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.sidebar-dropdown-item:hover {
+  color: white;
+  background-color: #495057;
+}
+
+.sidebar-dropdown-item i {
+  font-size: 0.9rem; /* Your PHP CSS had 1rem */
+}
+
+.sidebar.collapsed .sidebar-dropdown-arrow {
+  display: none; /* As per your PHP CSS */
+}
+
+
+/* Responsive Adjustments for Sidebar (from your dashboard.css originally) */
+@media (max-width: 768px) {
+  .sidebar, 
+  .sidebar.collapsed {
+    width: 100%;
+    height: auto; 
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    padding: 0.5rem 0;
+    top: 3.5rem; 
+    z-index: 1020;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  }
+
+  .sidebar-sticky-container { /* Adjust for row layout */
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    width: 100%;
+    overflow-y: visible;
+    padding: 0;
+  }
+  .sidebar .nav-flex-column { /* This is the UL */
+      display: flex;
+      flex-direction: row;
+      width: 100%;
+      justify-content: space-around;
+  }
+
+  .sidebar .nav-item { margin: 0; }
+  .sidebar .nav-link {
+    padding: 0.5rem;
+    margin-top: 0;
+    flex-direction: column;
+    align-items: center;
+    font-size: 0.7rem; /* Smaller text */
+  }
+  .sidebar .nav-link i { margin-bottom: 0.25rem; font-size: 1.1rem; }
+  .sidebar .nav-link span,
+  .sidebar.collapsed .nav-link span { display: inline-block; }
+
+  .logged-in, .sidebar.collapsed .logged-in { display: none; }
+
+  .sidebar-dropdown-menu {
+    position: absolute;
+    left: 0;
+    top: 100%; /* Below the nav item */
+    width: auto;
+    min-width: 150px;
+    z-index: 1021; /* Above sidebar content if it overlaps */
+  }
+   .sidebar.collapsed .sidebar-dropdown-menu {
+      display: none !important;
+   }
+}

@@ -1,0 +1,62 @@
+/* src/components/Dashboard/Dashboard.css */
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr; /* Default for larger screens */
+  gap: 20px;
+  /* margin-top: 20px; */ /* Removed, container-fluid in Dashboard.jsx has mt-4 */
+}
+
+.card-graph {
+  /* height: 300px; */ /* Let content define height or use min-height if necessary */
+  margin-bottom: 20px; /* Spacing between cards in the same column */
+}
+
+.card-graph .card-body,
+.card .card-body { /* Ensure chart canvas containers have relative positioning and defined height */
+  position: relative;
+  min-height: 250px; /* Example minimum height for charts */
+}
+
+
+.patient-status-item { /* Renamed from .patient-status to avoid conflict if used elsewhere */
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px;
+  border-bottom: 1px solid #eee;
+}
+
+.status-badge {
+  padding: 4px 8px;
+  border-radius: 12px;
+  font-size: 0.8rem;
+}
+
+.confirmed { background-color: #d4edda; color: #155724; }
+.pending { background-color: #fff3cd; color: #856404; }
+.canceled { background-color: #f8d7da; color: #721c24; }
+
+/* Ajustes para gráficos */
+.card-body canvas {
+  max-width: 100%;
+  /* height: auto !important; */ /* Chart.js usually handles this, ensure container has height */
+}
+
+/* Tabela */
+.table-responsive {
+  overflow-x: auto; /* Apenas scroll horizontal se necessário */
+}
+
+/* Media Queries specific to dashboard content grid */
+@media (max-width: 992px) { /* Adjusted breakpoint for better 2-col to 1-col transition */
+  .dashboard-grid {
+    grid-template-columns: 1fr; /* Uma coluna em telas menores */
+  }
+}
+
+/* @media (max-width: 576px) {
+  .card {
+    margin-bottom: 1rem;
+  }
+} */
+/* .chart-container class was in your styles.css, if you use it, define it here or globally */

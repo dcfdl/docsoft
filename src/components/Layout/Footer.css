@@ -1,0 +1,10 @@
+/* src/components/Layout/Footer.css */
+.footer {
+  padding: 1rem;
+  background-color: #f8f9fa; /* Example background */
+  text-align: center;
+  border-top: 1px solid #e7e7e7;
+  /* position: fixed; */ /* Let App.jsx handle positioning */
+  /* bottom: 0; */
+  /* width: 100%; */
+}
