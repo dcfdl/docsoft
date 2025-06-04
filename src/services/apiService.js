@@ -77,3 +77,22 @@ export const getEstatisticasConsultas = async () => {
   return handleResponse(response);
 };
 
+// --- Agendamentos --- (NOVO)
+/**
+ * Busca agendamentos filtrando por data.
+ * Nota: Seu db.json tem 'date' e 'time'. O PHP API usa 'data_agendamento' e 'hora_agendamento'.
+ * Ajustei para usar 'date' como no db.json.
+ * O filtro por aluno_id pode ser adicionado se necessário.
+ */
+export const getAgendamentos = async (startDate, endDate /*, alunoId */) => {
+  // json-server suporta _gte (maior ou igual) e _lte (menor ou igual) para filtragem
+  // e & para múltiplos filtros.
+  let url = `${API_BASE_URL}/agendamentos?date_gte=${startDate}&date_lte=${endDate}`;
+
+  // Exemplo se você adicionar aluno_id aos seus agendamentos no db.json:
+  // if (alunoId) {
+  //   url += `&aluno_id=${alunoId}`;
+  // }
+  const response = await fetch(url);
+  return handleResponse(response);
+};

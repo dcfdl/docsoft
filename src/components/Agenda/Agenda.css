@@ -1,0 +1,151 @@
+
+.agenda-period-label {
+  font-size: 1.5rem; /* Ajuste conforme seu gosto */
+  white-space: nowrap;
+}
+
+.appointment {
+  background: #ffffff;
+  padding: 3px 6px;
+  margin: 3px 0;
+  border-radius: 4px;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+  font-size: 0.78rem; /* Um pouco menor para caber mais */
+  transition: background-color 0.2s ease-in-out;
+  cursor: pointer;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  border-left: 3px solid #0d6efd; /* Cor de destaque */
+}
+
+.appointment:hover {
+  background-color: #eef;
+}
+
+.dropdown-appointments {
+  position: relative; /* Necessário para o posicionamento absoluto do menu */
+  display: block; /* Para ocupar a linha se for o único elemento */
+  margin-top: 2px;
+}
+
+.more-appointments {
+  color: #007bff;
+  font-weight: 500;
+  text-decoration: none;
+  cursor: pointer;
+  font-size: 0.75rem;
+}
+.more-appointments:hover {
+  text-decoration: underline;
+}
+.more-appointments i {
+    font-size: 0.6rem;
+    margin-left: 2px;
+}
+
+
+.appointments-dropdown-menu {
+  display: none; /* React controla via estado */
+  position: absolute;
+  background-color: #fff;
+  min-width: 280px; /* Aumentado para mais detalhes */
+  max-height: 180px;
+  overflow-y: auto;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  z-index: 1050;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  top: 100%; /* Posiciona abaixo do "Mais X" */
+  left: 0;
+  padding: 5px 0; /* Espaçamento interno */
+}
+
+.appointments-dropdown-menu.show {
+  display: block;
+}
+
+.appointments-dropdown-menu .dropdown-item {
+  padding: 6px 12px;
+  display: block;
+  border-bottom: 1px solid #eee;
+  font-size: 0.78rem;
+  color: #212529;
+  text-decoration: none;
+  white-space: normal; /* Permite quebra de linha */
+}
+.appointments-dropdown-menu .dropdown-item:last-child {
+  border-bottom: none;
+}
+.appointments-dropdown-menu .dropdown-item:hover {
+  background-color: #f0f0f0;
+}
+
+/* Visualização de Dia */
+.day-view .list-group-item.day-slot {
+  border: 1px solid #e0e0e0;
+  padding: 8px;
+  min-height: 70px; /* Aumentar um pouco */
+  position: relative; /* Para o no-appointments */
+}
+.day-view .list-group-item.day-slot strong {
+  display: block;
+  margin-bottom: 5px;
+  font-size: 0.9rem;
+  color: #555;
+}
+.day-view .list-group {
+    border-radius: 0.25rem; /* Cantos arredondados para o grupo */
+}
+
+
+/* Visualização de Semana */
+.week-table th, .month-table th {
+  background-color: #f8f9fa; /* Cor de cabeçalho Bootstrap */
+  font-weight: 600; /* Um pouco mais de peso */
+  font-size: 0.8rem;
+  text-align: center;
+  padding: 0.5rem 0.25rem; /* Ajuste de padding */
+}
+.week-table td, .month-table td {
+  vertical-align: top;
+  padding: 6px;
+  border: 1px solid #e0e0e0;
+  height: 90px; /* Altura base para as células */
+  position: relative; /* Para o no-appointments */
+}
+.week-table .time-label {
+    font-weight: 500;
+    font-size: 0.8rem;
+    background-color: #f8f9fa;
+    text-align: center;
+    width: 70px; /* Largura fixa para a coluna de hora */
+}
+.week-table td.today, .month-table td.today {
+  background-color: #e6f3ff; /* Um azul mais claro para hoje */
+}
+.week-table td.today .day-number {
+    font-weight: bold;
+    color: #0056b3;
+}
+
+
+/* Visualização de Mês */
+.month-table td {
+  height: 110px; /* Células do mês um pouco maiores */
+}
+.month-table .day-number {
+  font-weight: bold;
+  margin-bottom: 4px;
+  display: block;
+  text-align: right;
+  font-size: 0.85rem;
+  color: #333;
+}
+.month-table td.other-month .day-number {
+  color: #aaa;
+}
+.month-table td.other-month .appointment,
+.month-table td.other-month .more-appointments {
+  opacity: 0.6; /* Agendamentos de outros meses mais apagados */
+}
