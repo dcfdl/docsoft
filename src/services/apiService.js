@@ -20,6 +20,13 @@ export const getPacienteById = async (id) => {
   return handleResponse(response);
 };
 
+// Pega todos os agendamentos de UM paciente específico
+export const getAgendamentosByPacienteId = async (pacienteId) => {
+  // json-server filtra por campo. Ex: /agendamentos?paciente_id=1
+  const response = await fetch(`${API_BASE_URL}/agendamentos?paciente_id=${pacienteId}`);
+  return handleResponse(response);
+};
+
 export const addPaciente = async (pacienteData) => {
   const response = await fetch(`${API_BASE_URL}/pacientes`, {
     method: 'POST',
@@ -96,3 +103,4 @@ export const getAgendamentos = async (startDate, endDate /*, alunoId */) => {
   const response = await fetch(url);
   return handleResponse(response);
 };
+

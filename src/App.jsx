@@ -6,6 +6,7 @@ import Sidebar from './components/Layout/Sidebar';
 import FooterContent from './components/Layout/Footer';
 import Dashboard from './components/Dashboard/Dashboard';
 import Agenda from './components/Agenda/Agenda'; // <<< Adicionar componente da Agenda
+import Pacientes from './components/Pacientes/Pacientes'; // <<< Adicionar componente de Paciente
 import './App.css';
 
 const MOCK_USER_SESSION = {
@@ -64,6 +65,7 @@ function App() {
             <Route path="/" element={<Dashboard />} />
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/agenda" element={<Agenda currentUser={currentUser} />} /> {/* <<< Rota da Agenda */}
+            <Route path="/pacientes" element={<Pacientes />} />
             {/* Exemplo de outra rota, caso você crie o componente Pacientes:
             <Route path="/pacientes" element={<PacientesComponent />} /> */}
           </Routes>
